@@ -3,7 +3,7 @@ const Task = require("../models/Task");
 // Create and Save a Task
 exports.saveTask = async (req, res, next) => {
   try {
-    const { task_name, description, assigned_to, due_date, assignee } =
+    const { task_name, description, assigned_to, due_date, project_name ,status} =
       req.body;
 
     const newTask = new Task({
@@ -11,7 +11,8 @@ exports.saveTask = async (req, res, next) => {
       description,
       assigned_to,
       due_date,
-      assignee,
+      project_name,
+      status,
     });
     await newTask.save();
 

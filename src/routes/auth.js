@@ -1,14 +1,11 @@
-const mongoose = require("mongoose");
+const express = require("express");
+const router = express.Router();
+const TaskController = require("../controllers/TaskController");
 
-const TaskSchema = new mongoose.Schema(
-  {
-    task_name: { type: String, required: true }, // Each task should have a unique name
-    description: { type: String, required: true }, // Ensure description is always provided
-    assigned_to: { type: String, required: true }, // Required field to assign task
-    due_date: { type: Date, required: true }, // Use Date type for due dates
-    assignee: { type: String, required: true }, // Removed unique constraint
-  },
-  { timestamps: true }
-);
+// Route setup
+router.get("/tasks", TaskController.allTask);
+router.post("/tasks", TaskController.saveTask);
+router.get("/tasks/:id", TaskController.getTask);
+router.delete("/tasks/:id", TaskController.deleteTask);
 
-module.exports = mongoose.model("Task", TaskSchema);
+module.exports = router;
